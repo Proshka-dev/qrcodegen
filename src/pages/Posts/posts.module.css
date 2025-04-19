@@ -1,0 +1,23 @@
+.posts {
+    padding: 20px 0;
+}
+
+.posts__title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    background-color: lightgray;
+    padding: 10px;
+
+}
+
+.posts__content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.posts__item {
+    background-color: rgb(228, 238, 244);
+    padding: 3px;
+    border-radius: 5px;
+}

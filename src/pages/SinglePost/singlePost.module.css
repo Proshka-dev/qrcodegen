@@ -1,0 +1,39 @@
+.singlepost {
+    padding: 20px 0;
+}
+
+.singlepost__content {
+    background-color: rgb(228, 238, 244);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(129, 143, 150);
+    box-shadow: 0 0 20px grey;
+}
+
+.singlepost__header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.singlepost__id {
+    min-width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.singlepost__title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.singlepost__text {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}

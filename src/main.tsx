@@ -11,6 +11,8 @@ import Layout from './pages/Layout/Layout.tsx'
 import { createBrowserRouter, RouterProvider, Link } from "react-router";
 import React from "react";
 import ErrorPage from './pages/ErrorPage/ErrorPage.tsx'
+import Posts, { postsLoader } from './pages/Posts/Posts.tsx'
+import SinglePost, { singlePostLoader } from './pages/SinglePost/SinglePost.tsx'
 
 const router = createBrowserRouter([
 	{
@@ -25,6 +27,16 @@ const router = createBrowserRouter([
 			{
 				path: "generate",
 				Component: QrCodeGenerator,
+			},
+			{
+				path: "posts",
+				Component: Posts,
+				loader: postsLoader,
+			},
+			{
+				path: "posts/:id",
+				Component: SinglePost,
+				loader: singlePostLoader,
 			},
 		]
 	},

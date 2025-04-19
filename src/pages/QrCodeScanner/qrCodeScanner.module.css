@@ -6,6 +6,8 @@
     font-size: 20px;
     margin-bottom: 20px;
     background-color: lightgray;
+    padding: 10px;
+
 }
 
 .qrcodescanner__scanwindow {
