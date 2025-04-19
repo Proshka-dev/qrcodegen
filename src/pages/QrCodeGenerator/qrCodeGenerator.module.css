@@ -1,4 +1,6 @@
-.qrcodegenerator {}
+.qrcodegenerator {
+    padding: 20px 0;
+}
 
 .qrcodegenerator__title {
     font-size: 20px;
@@ -15,6 +17,8 @@
 
 .qrcodegenerator__input {
     height: fit-content;
+    border: 1px solid black;
+    padding: 5px;
 }
 
 .qrcodegenerator__button {

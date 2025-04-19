@@ -1,27 +1,30 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import './nullstyle.css'
 import './index.css'
 
 //Routing
 import QrCodeGenerator from './pages/QrCodeGenerator/QrCodeGenerator.tsx'
 import QrCodeScanner from './pages/QrCodeScanner/QrCodeScanner.tsx'
+import Layout from './pages/Layout/Layout.tsx'
 
 import { createBrowserRouter, RouterProvider, Link } from "react-router";
 import React from "react";
 
 const router = createBrowserRouter([
 	{
-		index: true,
 		path: "/",
-		element: <div>Hello World</div>,
-	},
-	{
-		path: "/scan",
-		element: <QrCodeScanner />,
-	},
-	{
-		path: "/generator",
-		element: <QrCodeGenerator />,
+		Component: Layout,
+		children: [
+			{
+				path: "scan",
+				Component: QrCodeScanner,
+			},
+			{
+				path: "generate",
+				Component: QrCodeGenerator,
+			},
+		]
 	},
 ]);
 

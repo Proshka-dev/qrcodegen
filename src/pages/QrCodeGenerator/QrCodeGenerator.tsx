@@ -29,31 +29,32 @@ const QrCodeGenerator = () => {
 
     return (
         <div className={s.qrcodegenerator}>
-            <div className={s.qrcodegenerator__title}>QrCodeGenerator component</div>
-            <div className={s.qrcodegenerator__body}>
+            <div className="container">
+                <div className={s.qrcodegenerator__title}>QrCodeGenerator component</div>
+                <div className={s.qrcodegenerator__body}>
+                    <input
+                        className={s.qrcodegenerator__input}
+                        onChange={onChangeHandler}
+                        type="text"
+                        value={value}
+                        placeholder='Введите текст'
+                    />
 
-                <input
-                    className={s.qrcodegenerator__input}
-                    onChange={onChangeHandler}
-                    type="text"
-                    value={value}
-                    placeholder='Введите текст'
-                />
+                    <button
+                        className={s.qrcodegenerator__button}
+                        onClick={onClickHandler}
+                        type='button'
+                    >
+                        Сгенерировать QR
+                    </button>
+                </div>
 
-                <button
-                    className={s.qrcodegenerator__button}
-                    onClick={onClickHandler}
-                    type='button'
-                >
-                    Сгенерировать QR
-                </button>
+                {result !== '' && (
+                    <QRCodeSVG
+                        className={s.qrcodegenerator__code}
+                        value={result} />
+                )}
             </div>
-
-            {result !== '' && (
-                <QRCodeSVG
-                    className={s.qrcodegenerator__code}
-                    value={result} />
-            )}
         </div>
     )
 }
