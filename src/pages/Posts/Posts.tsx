@@ -17,7 +17,7 @@ const Posts = () => {
 			<div className="container">
 				<div className={s.posts__body}>
 					<div className={s.posts__title}>
-						Posts title
+						Сообщения пользователей
 					</div>
 
 					<div className={s.posts__content}>

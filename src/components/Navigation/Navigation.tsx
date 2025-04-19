@@ -6,9 +6,10 @@ const Navigation = () => {
     return (
         <>
             <nav className='navigation'>
-                <NavLink to="/scan">Scan</NavLink>
-                <NavLink to="/generate">Generate</NavLink>
-                <NavLink to="/posts">Posts</NavLink>
+                <NavLink to="/scan">Сканирование штрихкода</NavLink>
+                <NavLink to="/generate">Генерирование QR кода</NavLink>
+                <NavLink to="/posts">Сообщения</NavLink>
+                <NavLink to="/addpost">Новое Сообщение</NavLink>
             </nav>
         </>
 

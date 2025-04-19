@@ -21,7 +21,9 @@ const QrCodeScanner = () => {
     return (
         <div className={s.qrcodescanner}>
             <div className="container">
-                <div className={s.qrcodescanner__title}>QrCodeScanner component</div>
+                <div className={s.qrcodescanner__title}>
+                    Сканирование штрих-кода
+                </div>
                 <div className={s.qrcodescanner__scanwindow} >
                     <BarcodeScannerComponent
                         width={300}

@@ -30,7 +30,9 @@ const QrCodeGenerator = () => {
     return (
         <div className={s.qrcodegenerator}>
             <div className="container">
-                <div className={s.qrcodegenerator__title}>QrCodeGenerator component</div>
+                <div className={s.qrcodegenerator__title}>
+                    Генерирование QR кода
+                </div>
                 <div className={s.qrcodegenerator__body}>
                     <input
                         className={s.qrcodegenerator__input}
