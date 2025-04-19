@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import s from './qrCodeScanner.module.css'
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import { Result } from "@zxing/library";
 
 const QrCodeScanner = () => {
 
     const [scanned, setScanned] = useState("штрихкод не найден");
 
-    const onUpdateHandler = (err, result) => {
+    const onUpdateHandler = (err: unknown, result: Result | undefined) => {
         if (result) {
-            setScanned(result.text);
-            console.log(result.text);
+            setScanned(result.getText());
+            console.log(result.getText());
         } else {
             setScanned("штрихкод не найден");
             console.log('штрихкод не найден');
@@ -21,11 +22,12 @@ const QrCodeScanner = () => {
         <div className={s.qrcodescanner}>
             <div className="container">
                 <div className={s.qrcodescanner__title}>QrCodeScanner component</div>
-                <BarcodeScannerComponent
-                    width={400}
-                    height={400}
-                    onUpdate={onUpdateHandler}
-                />
+                <div className={s.qrcodescanner__scanwindow} >
+                    <BarcodeScannerComponent
+                        width={300}
+                        onUpdate={onUpdateHandler}
+                    />
+                </div>
                 <div>
                     <span>Результат сканирования: </span>
                     {scanned}

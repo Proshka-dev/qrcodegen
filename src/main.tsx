@@ -10,11 +10,13 @@ import Layout from './pages/Layout/Layout.tsx'
 
 import { createBrowserRouter, RouterProvider, Link } from "react-router";
 import React from "react";
+import ErrorPage from './pages/ErrorPage/ErrorPage.tsx'
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		Component: Layout,
+		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: "scan",

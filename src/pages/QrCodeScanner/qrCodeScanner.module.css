@@ -7,3 +7,9 @@
     margin-bottom: 20px;
     background-color: lightgray;
 }
+
+.qrcodescanner__scanwindow {
+    border: 2px solid blueviolet;
+    width: fit-content;
+    min-height: 230px;
+}
