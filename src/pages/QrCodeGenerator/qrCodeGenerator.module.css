@@ -1,0 +1,25 @@
+.qrcodegenerator {}
+
+.qrcodegenerator__title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    background-color: lightgray;
+}
+
+.qrcodegenerator__body {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.qrcodegenerator__input {
+    height: fit-content;
+}
+
+.qrcodegenerator__button {
+    border: 1px solid black;
+    box-shadow: 0 0 5px grey;
+}
+
+.qrcodegenerator__code {}
