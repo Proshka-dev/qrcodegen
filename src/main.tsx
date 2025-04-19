@@ -13,7 +13,7 @@ import React from "react";
 import ErrorPage from './pages/ErrorPage/ErrorPage.tsx'
 import Posts, { postsLoader } from './pages/Posts/Posts.tsx'
 import SinglePost, { singlePostLoader } from './pages/SinglePost/SinglePost.tsx'
-import AddPost from './pages/AddPost/AddPost.tsx'
+import AddPost, { addPostAction } from './pages/AddPost/AddPost.tsx'
 
 const router = createBrowserRouter([
 	{
@@ -42,6 +42,7 @@ const router = createBrowserRouter([
 			{
 				path: "addpost",
 				Component: AddPost,
+				action: addPostAction
 			},
 		]
 	},

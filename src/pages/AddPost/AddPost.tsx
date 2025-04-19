@@ -1,7 +1,26 @@
 import React, { useState } from 'react'
 import s from './addPost.module.css'
 import axios from 'axios';
-import { Form } from 'react-router';
+import { Form, redirect } from 'react-router';
+
+const addPostAction = async ({ request, params }) => {
+	// получаем данные с формы
+	const formData = await request.formData();
+
+	// методом get('значение_атрибута_name') получаем введенные данные
+	const newPost = {
+		id: 123,
+		title: formData.get('title'),
+		body: formData.get('body'),
+	};
+
+	// отправляем на сервер
+	await axios.post('https://jsonplaceholder.typicode.com/posts/', newPost);
+
+	// после отправки редирект на роут /posts
+	return redirect('/posts');
+
+};
 
 const AddPost = () => {
 
@@ -9,7 +28,7 @@ const AddPost = () => {
 
 		<div className={s.addpost}>
 			<div className="container">
-				<Form>
+				<Form method='post' action='/addpost'>
 					<div className={s.addpost__body}>
 						<div className={s.addpost__header}>
 							<div>
@@ -22,7 +41,7 @@ const AddPost = () => {
 							<div>
 								Сообщение:
 							</div>
-							<input className={s.addpost__input} type="text" name='message' />
+							<input className={s.addpost__input} type="text" name='body' />
 						</div>
 
 					</div>
@@ -39,3 +58,4 @@ const AddPost = () => {
 }
 
 export default AddPost
+export { addPostAction }
