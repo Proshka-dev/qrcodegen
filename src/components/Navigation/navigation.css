@@ -11,5 +11,13 @@
     border-radius: 8px 8px 0 0;
     border: 1px solid rgb(40, 79, 195);
     border-bottom: none;
+    color: black;
+}
 
+.navigation__link.active {
+    color: blueviolet;
+}
+
+.navigation__link.pending {
+    color: grey;
 }
