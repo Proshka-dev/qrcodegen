@@ -10,6 +10,7 @@ const Navigation = () => {
                 <NavLink className='navigation__link' to="/generate">Генерирование QR кода</NavLink>
                 <NavLink className='navigation__link' to="/posts">Сообщения</NavLink>
                 <NavLink className='navigation__link' to="/addpost">Новое Сообщение</NavLink>
+                <NavLink className='navigation__link' to="/history">История</NavLink>
             </nav>
         </>
 

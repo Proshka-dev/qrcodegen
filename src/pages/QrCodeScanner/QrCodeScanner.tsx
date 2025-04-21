@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import s from './qrCodeScanner.module.css'
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import { Result } from "@zxing/library";
+import { saveDataInLocalStorage } from '../../components/commonFunctions/commonFunctions';
 
 const QrCodeScanner = () => {
 
@@ -14,9 +15,11 @@ const QrCodeScanner = () => {
             setScanned(result.getText());
             setIsScanActivated(false);
             // сохранаяем результат в локальное хранилище
-            const scanDataInStorage = JSON.parse(localStorage.getItem('scan_data') || '[]');
-            scanDataInStorage.push(scanned);
-            localStorage.setItem('scan_data', JSON.stringify(scanDataInStorage));
+            saveDataInLocalStorage({
+                operationType: 'scan',
+                date: new Date(),
+                text: result.getText(),
+            });
 
         } else {
             setScanned("штрихкод не найден");

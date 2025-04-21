@@ -1,0 +1,95 @@
+import s from './history.module.css'
+import { formatDate, getDataFromLocalStorage } from '../../components/commonFunctions/commonFunctions'
+import { TSaveOperationProps, TSaveDataProps } from '../../components/commonFunctions/types';
+import { useState } from 'react';
+
+type TRenderTableParams = {
+    operationsData: TSaveDataProps[],
+    showGen: boolean,
+    showScan: boolean,
+}
+
+function renderTable(params: TRenderTableParams) {
+    const table = params.operationsData.filter((item) => {
+        if (item.operationType === 'gen') { return params.showGen };
+        if (item.operationType === 'scan') { return params.showScan };
+    });
+
+
+    return (
+        <div className={s.history__table}>
+            {table.map((data: TSaveDataProps) => (
+                <div className={s.history__tableline} key={data.date.getTime()}>
+                    {formatDate(data.date)}
+                    <span> </span>
+                    {data.operationType}
+                    <span> </span>
+                    {data.text}
+                </div>
+            ))}
+        </div>
+    )
+}
+
+
+const History = () => {
+    // хуки
+    const [showScan, setShowScan] = useState(true);
+    const [showGen, setShowGen] = useState(true);
+
+
+    // Получение данных из локального хранилища
+    const scanData = getDataFromLocalStorage({ operationType: 'scan' });
+    const genData = getDataFromLocalStorage({ operationType: 'gen' });
+
+    // Объединение данных в один массив operationsData
+    const operationsScanData = scanData.map((item: TSaveOperationProps): TSaveDataProps => ({ operationType: 'scan', ...item }));
+    const operationsGenData = genData.map((item: TSaveOperationProps): TSaveDataProps => ({ operationType: 'gen', ...item }));
+    const operationsData: TSaveDataProps[] = [...operationsScanData, ...operationsGenData];
+
+    // Обработчики элементов управления
+    function onChangeScanHandler() {
+        setShowScan((value) => (!value));
+    }
+
+    function onChangeGenHandler() {
+        setShowGen((value) => (!value));
+    }
+
+    return (
+        <div className={s.history}>
+            <div className="container">
+                <div className={s.history__settingspanel}>
+                    <div className={s.history__scan}>
+                        <input type="checkbox" name='showscan' checked={showScan} onChange={onChangeScanHandler} />
+                        <label htmlFor="showscan">Сканирование</label>
+                    </div>
+                    <div className={s.history__gen}>
+                        <input type="checkbox" name='showgen' checked={showGen} onChange={onChangeGenHandler} />
+                        <label htmlFor="showgen">Генерирование</label>
+                    </div>
+                    <div className={s.history__search}>
+                        <label htmlFor="search">Поиск</label>
+                        <input type="text" name='search' placeholder='Строка для поиска' />
+                    </div>
+                    <div className={s.history__sort}>
+                        <label htmlFor="sort-select">Сортировка</label>
+                        <select name="sort" id="sort-select">
+                            <option value="date">дата</option>
+                            <option value="text">текст</option>
+                            <option value="type">тип</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div className={s.history__tabletitle}>
+                    История действий
+                </div>
+                {renderTable({ operationsData, showGen, showScan })}
+            </div>
+
+        </div>
+    )
+}
+
+export default History

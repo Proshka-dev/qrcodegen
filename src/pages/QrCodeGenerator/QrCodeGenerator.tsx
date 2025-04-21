@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react';
 import s from './qrCodeGenerator.module.css'
+import { saveDataInLocalStorage } from '../../components/commonFunctions/commonFunctions';
 
 const QrCodeGenerator = () => {
     // ***** Переменные *****
@@ -16,6 +17,13 @@ const QrCodeGenerator = () => {
         console.log('onClickHandler() вызвана');
         setResult(value);
         setValue('');
+
+        //сохранение данных в локальном хранилище
+        saveDataInLocalStorage({
+            operationType: 'gen',
+            date: new Date(),
+            text: value,
+        });
     }
 
     //Функция onChangeHandler
