@@ -8,8 +8,7 @@ import QrCodeGenerator from './pages/QrCodeGenerator/QrCodeGenerator.tsx'
 import QrCodeScanner from './pages/QrCodeScanner/QrCodeScanner.tsx'
 import Layout from './pages/Layout/Layout.tsx'
 
-import { createBrowserRouter, RouterProvider, Link } from "react-router";
-import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import ErrorPage from './pages/ErrorPage/ErrorPage.tsx'
 import Posts, { postsLoader } from './pages/Posts/Posts.tsx'
 import SinglePost, { singlePostLoader } from './pages/SinglePost/SinglePost.tsx'

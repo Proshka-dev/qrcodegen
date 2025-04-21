@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
 import s from './addPost.module.css'
 import axios from 'axios';
 import { Form, redirect } from 'react-router';
+import type { ActionFunctionArgs } from 'react-router';
 
-const addPostAction = async ({ request, params }) => {
+const addPostAction = async ({ request, }: ActionFunctionArgs<any>) => {
 	// получаем данные с формы
 	const formData = await request.formData();
 

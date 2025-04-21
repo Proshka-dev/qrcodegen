@@ -12,7 +12,7 @@ const QrCodeGenerator = () => {
 
     // ***** Функции *****
     //Функция onClickHandler
-    const onClickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onClickHandler = () => {
         console.log('onClickHandler() вызвана');
         setResult(value);
         setValue('');

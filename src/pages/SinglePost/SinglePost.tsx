@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
 import s from './singlePost.module.css'
 import axios from 'axios';
 import { useLoaderData } from 'react-router';
+import { LoaderFunctionArgs } from 'react-router';
+
 
 //Загрузчик
-const singlePostLoader = async ({ request, params }) => {
+const singlePostLoader = async ({ params }: LoaderFunctionArgs<any>) => {
 	const { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
 	return data;
 };

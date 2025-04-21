@@ -9,6 +9,7 @@ const QrCodeScanner = () => {
     const [isScanActivated, setIsScanActivated] = useState(false);
 
     const onUpdateHandler = (err: unknown, result: Result | undefined) => {
+        console.error(err);
         if (result) {
             setScanned(result.getText());
             setIsScanActivated(false);
@@ -29,7 +30,7 @@ const QrCodeScanner = () => {
         //event.target.disabled = is;
     }
 
-    const onClickStopHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onClickStopHandler = () => {
         setIsScanActivated(false);
     }
 
