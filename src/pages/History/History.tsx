@@ -3,18 +3,31 @@ import { formatDate, getDataFromLocalStorage } from '../../components/commonFunc
 import { TSaveOperationProps, TSaveDataProps } from '../../components/commonFunctions/types';
 import { useState } from 'react';
 
+type TSortType = 'date' | 'text' | 'type';
+
 type TRenderTableParams = {
     operationsData: TSaveDataProps[],
     showGen: boolean,
     showScan: boolean,
+    sortBy: TSortType,
+    filterString?: string,
 }
 
+
 function renderTable(params: TRenderTableParams) {
-    const table = params.operationsData.filter((item) => {
+    // фильтр по типу
+    let table = params.operationsData.filter((item) => {
         if (item.operationType === 'gen') { return params.showGen };
         if (item.operationType === 'scan') { return params.showScan };
     });
 
+    // сортировка
+    table.sort((a, b) => {
+        if (params.sortBy === 'date') { return a.date > b.date ? 1 : -1; };
+        if (params.sortBy === 'text') { return ((a.text.toLowerCase()).localeCompare(b.text.toLowerCase())) };
+        if (params.sortBy === 'type') { return a.operationType > b.operationType ? 1 : -1; };
+        return 1; // почему ругается при отсутствии этой строчки?
+    });
 
     return (
         <div className={s.history__table}>
@@ -37,6 +50,8 @@ const History = () => {
     const [showScan, setShowScan] = useState(true);
     const [showGen, setShowGen] = useState(true);
 
+    const [sortBy, setSortBy] = useState<TSortType>('date');
+
 
     // Получение данных из локального хранилища
     const scanData = getDataFromLocalStorage({ operationType: 'scan' });
@@ -56,6 +71,21 @@ const History = () => {
         setShowGen((value) => (!value));
     }
 
+    function onChangeSortHandler(event: React.ChangeEvent<HTMLSelectElement>) {
+        switch (event.target.value) {
+            case 'text':
+                setSortBy('text');
+                break;
+            case 'date':
+                setSortBy('date');
+                break;
+            case 'type':
+                setSortBy('type');
+                break;
+        }
+    }
+
+
     return (
         <div className={s.history}>
             <div className="container">
@@ -74,7 +104,7 @@ const History = () => {
                     </div>
                     <div className={s.history__sort}>
                         <label htmlFor="sort-select">Сортировка</label>
-                        <select name="sort" id="sort-select">
+                        <select name="sort" id="sort-select" onChange={onChangeSortHandler}>
                             <option value="date">дата</option>
                             <option value="text">текст</option>
                             <option value="type">тип</option>
@@ -85,7 +115,7 @@ const History = () => {
                 <div className={s.history__tabletitle}>
                     История действий
                 </div>
-                {renderTable({ operationsData, showGen, showScan })}
+                {renderTable({ operationsData, showGen, showScan, sortBy })}
             </div>
 
         </div>
