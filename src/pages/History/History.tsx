@@ -10,7 +10,7 @@ type TRenderTableParams = {
     showGen: boolean,
     showScan: boolean,
     sortBy: TSortType,
-    filterString?: string,
+    searchString?: string,
 }
 
 
@@ -49,8 +49,10 @@ const History = () => {
     // хуки
     const [showScan, setShowScan] = useState(true);
     const [showGen, setShowGen] = useState(true);
-
     const [sortBy, setSortBy] = useState<TSortType>('date');
+    const [searchInputValue, setSearchInputValue] = useState('');
+    const [searchString, setSearchString] = useState('');
+    const [changeSearhStringDelayed, setChangeSearhStringDelayed] = useState(false);
 
 
     // Получение данных из локального хранилища
@@ -85,6 +87,23 @@ const History = () => {
         }
     }
 
+    // обработчик изменения input-а с поиском
+    //let changeSearhStringDelayed = false; ПОЧЕМУ НЕ СРАБОТАЛО??????????
+    function onChangeSearchInputHandler(event: React.ChangeEvent<HTMLInputElement>) {
+        setSearchInputValue(event.target.value);
+        const delayTime = 4000; //задержка обновления поиска
+        //console.log(new Date(), changeSearhStringDelayed);
+        // обновление с задержкой
+        if (!changeSearhStringDelayed) {
+            // Если не задержано, то запланировать обновление
+            setChangeSearhStringDelayed(true);
+            setTimeout(() => {
+                setChangeSearhStringDelayed(false);
+                setSearchString(event.target.value);
+                console.log('delayed setSearchString', event.target.value);
+            }, delayTime);
+        }
+    }
 
     return (
         <div className={s.history}>
@@ -100,7 +119,7 @@ const History = () => {
                     </div>
                     <div className={s.history__search}>
                         <label htmlFor="search">Поиск</label>
-                        <input type="text" name='search' placeholder='Строка для поиска' />
+                        <input type="text" name='search' placeholder='Строка для поиска' onChange={onChangeSearchInputHandler} value={searchInputValue} />
                     </div>
                     <div className={s.history__sort}>
                         <label htmlFor="sort-select">Сортировка</label>

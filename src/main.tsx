@@ -14,6 +14,7 @@ import Posts, { postsLoader } from './pages/Posts/Posts.tsx'
 import SinglePost, { singlePostLoader } from './pages/SinglePost/SinglePost.tsx'
 import AddPost, { addPostAction } from './pages/AddPost/AddPost.tsx'
 import History from './pages/History/History.tsx'
+import EffectTest from './pages/EffectTest/EffectTest.tsx'
 
 const router = createBrowserRouter([
 	{
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
 			{
 				path: "history",
 				Component: History,
+			},
+			{
+				path: "effecttest",
+				Component: EffectTest,
 			},
 		]
 	},

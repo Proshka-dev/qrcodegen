@@ -50,8 +50,13 @@
 }
 
 .history__table {
-    border: 1px dashed green;
+    border: 1px solid black;
     font-size: 16px;
+    box-shadow: 0 0 10px grey;
+}
+
+.history__tableline {
+    padding: 5px;
 }
 
 .history__tableline:nth-child(even) {
