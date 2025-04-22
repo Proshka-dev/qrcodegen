@@ -1,12 +1,12 @@
 import s from './history.module.css'
 import { formatDate, getDataFromLocalStorage } from '../../components/commonFunctions/commonFunctions'
-import { TSaveOperationProps, TSaveDataProps } from '../../components/commonFunctions/types';
+import { ISaveOperationProps, ISaveDataProps } from '../../components/commonFunctions/types';
 import { useState } from 'react';
 
 type TSortType = 'date' | 'text' | 'type';
 
-type TRenderTableParams = {
-    operationsData: TSaveDataProps[],
+interface IRenderTableParams {
+    operationsData: ISaveDataProps[],
     showGen: boolean,
     showScan: boolean,
     sortBy: TSortType,
@@ -14,7 +14,7 @@ type TRenderTableParams = {
 }
 
 
-function renderTable(params: TRenderTableParams) {
+function renderTable(params: IRenderTableParams) {
     // фильтр по типу
     let table = params.operationsData.filter((item) => {
         if (item.text.includes(params.searchString)) {
@@ -33,7 +33,7 @@ function renderTable(params: TRenderTableParams) {
 
     return (
         <div className={s.history__table}>
-            {table.map((data: TSaveDataProps) => (
+            {table.map((data: ISaveDataProps) => (
                 <div className={s.history__tableline} key={data.date.getTime()}>
                     {formatDate(data.date)}
                     <span> </span>
@@ -62,9 +62,9 @@ const History = () => {
     const genData = getDataFromLocalStorage({ operationType: 'gen' });
 
     // Объединение данных в один массив operationsData
-    const operationsScanData = scanData.map((item: TSaveOperationProps): TSaveDataProps => ({ operationType: 'scan', ...item }));
-    const operationsGenData = genData.map((item: TSaveOperationProps): TSaveDataProps => ({ operationType: 'gen', ...item }));
-    const operationsData: TSaveDataProps[] = [...operationsScanData, ...operationsGenData];
+    const operationsScanData = scanData.map((item: ISaveOperationProps): ISaveDataProps => ({ operationType: 'scan', ...item }));
+    const operationsGenData = genData.map((item: ISaveOperationProps): ISaveDataProps => ({ operationType: 'gen', ...item }));
+    const operationsData: ISaveDataProps[] = [...operationsScanData, ...operationsGenData];
 
     // Обработчики элементов управления
     function onChangeScanHandler() {

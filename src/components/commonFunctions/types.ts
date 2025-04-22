@@ -1,16 +1,13 @@
-type TSaveDataProps = {
+interface IGetDataProps {
     operationType: 'scan' | 'gen';
+}
+
+interface ISaveOperationProps {
     text: string;
     date: Date;
 }
 
-type TGetDataProps = {
-    operationType: 'scan' | 'gen';
+interface ISaveDataProps extends IGetDataProps, ISaveOperationProps {
 }
 
-type TSaveOperationProps = {
-    text: string;
-    date: Date;
-}
-
-export type { TSaveDataProps, TGetDataProps, TSaveOperationProps }
+export type { ISaveDataProps, IGetDataProps, ISaveOperationProps }

@@ -1,12 +1,12 @@
-import { TSaveDataProps, TGetDataProps } from "./types";
+import { ISaveDataProps, IGetDataProps } from "./types";
 
-function saveDataInLocalStorage(props: TSaveDataProps) {
+function saveDataInLocalStorage(props: ISaveDataProps) {
     const dataInStorage = JSON.parse(localStorage.getItem(`${props.operationType}_data`) || '[]');
     dataInStorage.push({ date: props.date.getTime(), text: props.text });
     localStorage.setItem(`${props.operationType}_data`, JSON.stringify(dataInStorage));
 }
 
-function getDataFromLocalStorage(props: TGetDataProps) {
+function getDataFromLocalStorage(props: IGetDataProps) {
     const dataInStorage = JSON.parse(localStorage.getItem(`${props.operationType}_data`) || '[]', (key, value) => {
         if (key == 'date') return new Date(value);
         return value;
