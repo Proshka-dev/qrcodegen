@@ -10,15 +10,17 @@ type TRenderTableParams = {
     showGen: boolean,
     showScan: boolean,
     sortBy: TSortType,
-    searchString?: string,
+    searchString: string,
 }
 
 
 function renderTable(params: TRenderTableParams) {
     // фильтр по типу
     let table = params.operationsData.filter((item) => {
-        if (item.operationType === 'gen') { return params.showGen };
-        if (item.operationType === 'scan') { return params.showScan };
+        if (item.text.includes(params.searchString)) {
+            if (item.operationType === 'gen') { return params.showGen };
+            if (item.operationType === 'scan') { return params.showScan };
+        } else return false;
     });
 
     // сортировка
@@ -87,12 +89,9 @@ const History = () => {
         }
     }
 
-    // обработчик изменения input-а с поиском
-    //let changeSearhStringDelayed = false; ПОЧЕМУ НЕ СРАБОТАЛО??????????
     function onChangeSearchInputHandler(event: React.ChangeEvent<HTMLInputElement>) {
         setSearchInputValue(event.target.value);
-        const delayTime = 4000; //задержка обновления поиска
-        //console.log(new Date(), changeSearhStringDelayed);
+        const delayTime = 1000; //задержка обновления поиска
         // обновление с задержкой
         if (!changeSearhStringDelayed) {
             // Если не задержано, то запланировать обновление
@@ -134,7 +133,7 @@ const History = () => {
                 <div className={s.history__tabletitle}>
                     История действий
                 </div>
-                {renderTable({ operationsData, showGen, showScan, sortBy })}
+                {renderTable({ operationsData, showGen, showScan, sortBy, searchString })}
             </div>
 
         </div>
